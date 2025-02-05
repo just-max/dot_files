@@ -1,13 +1,16 @@
 if [[ -v bashlib_imported ]]; then return 0; fi
 declare -r bashlib_imported='1'
 
-bashlib_source_dir() {
-    local bash_file
-    if [[ -d $1 ]]; then
-        while IFS= read -r -d $'\0' bash_file <&3; do
-            source "$bash_file"
-        done 3< <(find "$1" -maxdepth 1 -type f -print0)
-    fi
+bashlib_list_dir_files() {
+    # usage: bashlib_list_dir_files path/to/dir array_variable
+    local -n _bashlib_list_dir_files_result="$2"
+    readarray -d '' _bashlib_list_dir_files_result < <(find "$1" -maxdepth 1 -type f -print0)
+}
+
+bashlib_list_dir() {
+    # usage: bashlib_list_dir path/to/dir array_variable
+    local -n _bashlib_list_dir_result="$2"
+    readarray -d '' _bashlib_list_dir_result < <(find "$1" -maxdepth 1 -print0)
 }
 
 bashlib_xdg_config_home() {
