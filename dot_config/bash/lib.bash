@@ -17,6 +17,10 @@ bashlib_xdg_config_home() {
     echo "${XDG_CONFIG_HOME:-$HOME/.config/}"
 }
 
+bashlib_xdg_state_home() {
+    echo "${XDG_STATE_HOME:-$HOME/.local/state/}"
+}
+
 bashlib_cursor_pos() {
     # usage: bashlib_cursor_pos my_row_var my_col_var
     [[ $# -ge 2 ]] || { printf 'bashlib_cursor_pos requires exactly two arguments' 1>&2; return 1; }
