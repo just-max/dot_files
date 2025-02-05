@@ -33,3 +33,8 @@ bashlib_cursor_pos() {
     IFS=';' read -sdR -p $'\E[6n' row col
     row="${row#*[}"
 }
+
+bashlib_shlexjoin() {
+    # from https://unix.stackexchange.com/a/781034/583028
+    echo "${*@Q}"
+}
