@@ -1,0 +1,29 @@
+Host *
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host lxhalle
+  User langm
+  HostName lxhalle.in.tum.de
+
+Host crazycaml
+  HostName server04.pl.cit.tum.de
+  User fpv21
+  ProxyJump lxhalle
+
+Host seidlbench
+  HostName atseidl19.in.tum.de
+  User mlang
+  ProxyJump lxhalle
+
+# for git
+Host versioncontrolseidl.in.tum.de
+  ProxyJump lxhalle
+
+Host oracle-instance-2
+  User ubuntu
+  HostName oi2.maxthomaslang.de
+
+Host pigeonbox
+  User mxl
+  HostName pigeonbox.maxthomaslang.de
