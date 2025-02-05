@@ -1,0 +1,5 @@
+# shellcheck shell=bash
+
+if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config/}/bash/bash_profile.bash" ]]; then
+    source "${XDG_CONFIG_HOME:-$HOME/.config/}/bash/bash_profile.bash"
+fi
