@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+systemctl --user daemon-reload
+
+{{
+    template "hashDir" dict
+        "chezmoi" .chezmoi
+        "glob" "*.{container,volume,network,kube,image,build,pod}{,.tmpl}"
+        "comment" "# "
+}}

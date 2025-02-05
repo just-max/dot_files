@@ -1,0 +1,17 @@
+[Unit]
+Description=Run languagetool in a container
+
+[Service]
+TimeoutStartSec=180
+
+[Container]
+Image=docker.io/erikvl87/languagetool:latest
+PublishPort=127.0.0.1:8081:8010
+DropCapability=all
+ReadOnly=true
+ReadOnlyTmpfs=true
+Environment=Java_Xms=512m
+Environment=Java_Xmx=2g
+
+[Install]
+WantedBy=default.target

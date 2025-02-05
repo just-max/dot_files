@@ -1,0 +1,15 @@
+{{- $files :=
+        joinPath
+            .chezmoi.sourceDir
+            (get . "dir" | default (dir .chezmoi.sourceFile))
+            "**"
+            (get . "glob" | default "*")
+        | glob -}}
+{{- $srcDir := .chezmoi.sourceDir }}
+{{- $hashes := dict -}}
+{{- range $files -}}
+    {{ $_ := set $hashes
+        (. | trimPrefix $srcDir | trimPrefix "/")
+        (includeTemplate . | sha256sum) }}
+{{- end -}}
+{{- $hashes | mustToPrettyJson | comment (get . "comment" | default "") -}}
