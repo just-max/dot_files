@@ -1,0 +1,57 @@
+[init]
+  defaultBranch = main
+[http]
+  sslVerify = true
+[core]
+  pager = less --mouse
+[filter "lfs"]
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+[url "https://github.com/"]
+  insteadOf = git://github.com/
+[alias]
+  s = status
+  d = diff
+  p = push
+  a = add
+  c = commit
+  sw = switch
+  ap = add --patch
+  g = log --graph '--pretty=format:%C(auto)%h%d%n%s' --branches
+  ga = log --graph '--pretty=format:%C(auto)%h%d%n%s' --all
+  unstage = restore --staged --
+[color "diff"]
+  old = "#bc4c00"
+  new = "#0968d9"
+[color "status"]
+  added = "#0968d9"
+  changed = "#bc4c00"
+  untracked = "#bc4c00"
+  unmerged = "#bc4c00"
+
+[commit]
+  gpgsign = true
+[gpg]
+  format=ssh
+[gpg.ssh]
+  allowedsignersfile=~/.ssh/allowed_signers
+[user]
+  name = Max Lang
+  signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINfWQUsXKgno5b0h3bxq6IMBkxp5eFWl7bVDL+oYlqPw mxl"
+
+# TUM (max.lang@tum.de)
+# for some reason, */** matches everything while **/* does not
+[includeIf "hasconfig:remote.*.url:git@gitlab.lrz.de:*/**"]
+  path = "user-tum.config"
+[includeIf "hasconfig:remote.*.url:https://*@artemis.cit.tum.de/git/**/*"]
+  path = "user-tum.config"
+[includeIf "hasconfig:remote.*.url:*//git@artemis.cit.tum.de:7921/**/*"]
+  path = "user-tum.config"
+
+# GitHub (17551908+just-max@users.noreply.github.com)
+[includeIf "hasconfig:remote.*.url:git@github.com:**/*"]
+  path = "user-github.config"
+[includeIf "hasconfig:remote.*.url:https://github.com/**/*"]
+  path = "user-github.config"
