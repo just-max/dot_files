@@ -152,4 +152,4 @@ function __bash_prompt_set_prompt() {
   PS1="$PS1"'\n$ '
 }
 
-declare -g PROMPT_COMMAND='__bash_prompt_set_prompt'
+PROMPT_COMMAND+=( __bash_prompt_set_prompt )
