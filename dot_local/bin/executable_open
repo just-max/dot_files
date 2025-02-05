@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if (( $# == 0 )) || [[ $1 = *://* || $1 = --* ]]; then xdg-open "$@"
+else
+    xdg-open "$(
+        python -c 'import pathlib; import sys; print(pathlib.Path(sys.argv[1]).as_uri())' \
+            "$(realpath "$1")"
+    )"
+fi
