@@ -22,6 +22,8 @@
   g = log --graph '--pretty=format:%C(auto)%h%d%n%s' --branches
   ga = log --graph '--pretty=format:%C(auto)%h%d%n%s' --all
   unstage = restore --staged --
+[merge]
+  conflictstyle = zdiff3
 [color "diff"]
   old = "#bc4c00"
   new = "#0968d9"
