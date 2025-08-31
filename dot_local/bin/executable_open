@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
 
-if (( $# == 0 )) || [[ $1 = *://* || $1 = --* ]]; then runbg xdg-open "$@"
-else
-    runbg xdg-open "$(
-        python -c 'import pathlib; import sys; print(pathlib.Path(sys.argv[1]).as_uri())' \
-            "$(realpath "$1")"
-    )"
+if (( $# == 0 )) || [[ $1 = --* ]]; then
+    # call xdg-open for help or with other --flags
+    xdg-open "$@"
+    exit
 fi
+
+while (( $# > 0 )); do
+    if [[ $1 = *://* ]]; then
+        # open a URI
+        runbg xdg-open "$1"
+    else
+        # open the first? file
+        runbg xdg-open "$(
+            python -c \
+                'import pathlib; import sys; print(pathlib.Path(sys.argv[1]).as_uri())' \
+                "$(realpath "$1")"
+        )"
+    fi
+    shift
+done
