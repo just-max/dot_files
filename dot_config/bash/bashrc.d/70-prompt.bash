@@ -104,10 +104,13 @@ function __bash_prompt_git() {
 
   if git rev-parse --verify --quiet 'HEAD^{commit}' >/dev/null; then
     # covers the cases where HEAD exists
-    current_ref=$(git name-rev --name-only HEAD)
+    current_ref=$(
+        git name-rev --name-only --no-undefined --refs='heads/*' HEAD 2>/dev/null \
+        || git rev-parse --short HEAD
+    )
   else
     # before the first commit, show the branch name
-    current_ref="*$(git branch --show-current)"
+    current_ref="$(git branch --show-current)*"
   fi
   printf %sgit:%s%s "$__bash_prompt_faint" "$__bash_prompt_reset" "$current_ref"
 
