@@ -20,6 +20,9 @@ mkdir -p "$(dirname "$HISTFILE")"
 # add a timestamp to history entries
 HISTTIMEFORMAT="[%F %T] "
 
+# fix systemd's broken PS0 (https://github.com/systemd/systemd/commit/dadbb34919abd3fefeb5b8ccc9794da9398a2503#r171679974)
+if [[ $PS0 =~ \\033\\\\$ ]]; then PS0="$PS0"'\\'; fi
+
 # shellcheck disable=SC2016
 PS0="$PS0"'$(history -a)'
 PROMPT_COMMAND+=( 'history -n' )
