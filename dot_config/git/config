@@ -57,3 +57,9 @@
   path = "user-github.config"
 [includeIf "hasconfig:remote.*.url:https://github.com/**/*"]
   path = "user-github.config"
+
+# GitLab (5695247-just-max@users.noreply.gitlab.com)
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:**/*"]
+  path = "user-gitlab.config"
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**/*"]
+  path = "user-gitlab.config"
