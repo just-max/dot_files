@@ -38,3 +38,15 @@ bashlib_shlexjoin() {
     # from https://unix.stackexchange.com/a/781034/583028
     echo "${*@Q}"
 }
+
+bashlib_command_exists() {
+    command -v "$1" > /dev/null 2>&1
+}
+
+bashlib_run_if_command_exists() {
+    bashlib_command_exists "$1" && "$@"
+}
+
+bashlib_source_if_exists() {
+    [[ -r "$1" ]] && source "$1"
+}

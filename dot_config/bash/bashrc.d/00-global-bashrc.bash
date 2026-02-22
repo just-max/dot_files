@@ -1,2 +1,2 @@
 # source global definitions
-if [ -f /etc/bashrc ]; then . /etc/bashrc; fi
+if [ -r /etc/bashrc ]; then source /etc/bashrc; fi

@@ -26,3 +26,5 @@ if [[ $PS0 =~ \\033\\\\$ ]]; then PS0="$PS0"'\\'; fi
 # shellcheck disable=SC2016
 PS0="$PS0"'$(history -a)'
 PROMPT_COMMAND+=( 'history -n' )
+
+# FIXME: adds duplicate entries to history when multiple shells are running in parallel
